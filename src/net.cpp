@@ -413,12 +413,12 @@ void ThreadGetMyExternalIP(void* parg)
     // Make this thread recognisable as the external IP detection thread
     RenameThread("peercoin-ext-ip");
 
-    CNetAddr addrLocalHost;
-    if (GetMyExternalIP(addrLocalHost))
-    {
-        printf("GetMyExternalIP() returned %s\n", addrLocalHost.ToStringIP().c_str());
-        AddLocal(addrLocalHost, LOCAL_HTTP);
-    }
+//    CNetAddr addrLocalHost;
+//    if (GetMyExternalIP(addrLocalHost))
+//    {
+//        printf("GetMyExternalIP() returned %s\n", addrLocalHost.ToStringIP().c_str());
+//        AddLocal(addrLocalHost, LOCAL_HTTP);
+//    }
 }
 
 
