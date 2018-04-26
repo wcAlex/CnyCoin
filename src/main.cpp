@@ -36,8 +36,8 @@ unsigned int nTransactionsUpdated = 0;
 map<uint256, CBlockIndex*> mapBlockIndex;
 set<pair<COutPoint, unsigned int> > setStakeSeen;
 uint256 hashGenesisBlock = hashGenesisBlockOfficial;
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
-static CBigNum bnInitialHashTarget(~uint256(0) >> 40);
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 1);
+static CBigNum bnInitialHashTarget(~uint256(0) >> 1);
 unsigned int nStakeMinAge = STAKE_MIN_AGE;
 int nCoinbaseMaturity = COINBASE_MATURITY_PPC;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -3227,10 +3227,10 @@ bool LoadBlockIndex()
         nModifierInterval = 60 * 20; // test net modifier interval is 20 minutes
 #else
         hashGenesisBlock = hashGenesisBlockTestNet;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 28);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 2);
         nStakeMinAge = 60 * 60 * 24; // test net min age is 1 day
         nCoinbaseMaturity = 60;
-        bnInitialHashTarget = CBigNum(~uint256(0) >> 29);
+        bnInitialHashTarget = CBigNum(~uint256(0) >> 2);
         nModifierInterval = 60 * 20; // test net modifier interval is 20 minutes
 #endif
     }
@@ -3261,16 +3261,15 @@ bool InitBlockIndex() {
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
     if (!fReindex) {
         // Genesis Block:
-        // CBlock(hash=000000000019d6, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=4a5e1e, nTime=1231006505, nBits=1d00ffff, nNonce=2083236893, vtx=1)
-        //   CTransaction(hash=4a5e1e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73)
-        //     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
-        //   vMerkleTree: 4a5e1e
-
+        //    CBlock(hash=66fb83b7fc0c6b1faf48451eac49cd4cdd3299f6e71cd9c32a9c3512013a9756, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333, nTime=1524579509, nBits=207fffff, nNonce=2, vtx=1, vchBlockSig=)
+        //        2018-04-26 05:00:55   Coinbase(hash=4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333, nTime=1524579509, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //    CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d020f27294368692057616e672030342d32382d323031382061206e6577206a6f75726e657920626567696e732e)
+        //    CTxOut(empty)
+        //    vMerkleTree: 4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333
         // Genesis block
-        const char* pszTimestamp = "Matonis 07-AUG-2012 Parallel Currencies And The Roadmap To Monetary Freedom";
+        const char* pszTimestamp = "Chi Wang 04-28-2018 a new journey begins.";
         CTransaction txNew;
-        txNew.nTime = 1345083810;
+        txNew.nTime = 1524579509;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(9999) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -3280,14 +3279,22 @@ bool InitBlockIndex() {
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1345084287;
+        block.nTime    = 1524579509;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 2179302059u;
+        block.nNonce   = 2;
 
         if (fTestNet)
         {
-            block.nTime    = 1345090000;
-            block.nNonce   = 122894938;
+            // Test Net Genesis Block
+//            CBlock(hash=111d629279146ee5c77959e2017146612d7df8d9b04292a68905fd56df01d97c, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333, nTime=1524579510, nBits=203fffff, nNonce=5, vtx=1, vchBlockSig=)
+//            Coinbase(hash=4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333, nTime=1524579509, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+//                CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d020f27294368692057616e672030342d32382d323031382061206e6577206a6f75726e657920626567696e732e)
+//                CTxOut(empty)
+//              vMerkleTree: 4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333
+
+            block.nTime    = 1524579510;
+            block.nNonce   = 5;
+            hashGenesisBlock = hashGenesisBlockTestNet;
         }
 
 #ifdef TESTING
@@ -3304,10 +3311,20 @@ bool InitBlockIndex() {
 
         //// debug print
         uint256 hash = block.GetHash();
-        printf("%s\n", hash.ToString().c_str());
-        printf("%s\n", hashGenesisBlock.ToString().c_str());
-        printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x3c2d8f85fab4d17aac558cc648a1a58acff0de6deb890c29985690052c5993c2"));
+
+        // calculate genesis block hash.
+//        CBigNum bnTarget;
+//        bnTarget.SetCompact(block.nBits);
+//        printf("hashTarget =%s \n", bnTarget.getuint256().ToString().c_str());
+
+//        while (block.GetHash() > bnTarget.getuint256())
+//        {
+//            if (block.nNonce % 1048576 == 0)
+//                printf("n=%dM hash=%s\n", block.nNonce / 1048576,
+//                               block.GetHash().ToString().c_str());
+//            block.nNonce++;
+//        }
+
         block.print();
         assert(hash == hashGenesisBlock);
         // ppcoin: check genesis block
@@ -3315,6 +3332,8 @@ bool InitBlockIndex() {
             CValidationState state;
             assert(block.CheckBlock(state));
         }
+
+        assert(block.hashMerkleRoot == uint256("4e2830f4fce41fdf53a0da3416cf88655a11a3b616d9bf8a0512738231422333"));
 
         // Start new block file
         try {
