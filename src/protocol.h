@@ -15,10 +15,10 @@
 #include <string>
 #include "uint256.h"
 
-#define PPCOIN_PORT  9966
-#define RPC_PORT     9967
-#define TESTNET_PORT 9968
-#define TESTNET_RPC_PORT 9969
+#define PPCOIN_PORT  9976
+#define RPC_PORT     9977
+#define TESTNET_PORT 9978
+#define TESTNET_RPC_PORT 9979
 
 extern bool fTestNet;
 extern unsigned char pchMessageStart[4];
