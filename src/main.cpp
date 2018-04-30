@@ -1240,14 +1240,21 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
 
     int64 nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
 
-    // ppcoin: target change every block
-    // ppcoin: retarget with exponential moving toward target spacing
+    // POW Mining
     CBigNum bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
-//    int64 nTargetSpacing = fProofOfStake? STAKE_TARGET_SPACING : min(nTargetSpacingWorkMax, (int64) STAKE_TARGET_SPACING * (1 + pindexLast->nHeight - pindexPrev->nHeight));
-//    int64 nInterval = nTargetTimespan / nTargetSpacing;
-//    bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
-//    bnNew /= ((nInterval + 1) * nTargetSpacing);
+    // ppcoin: target change every block
+    // ppcoin: retarget with exponential moving toward target spacing
+    //int64 nTargetSpacing = fProofOfStake? STAKE_TARGET_SPACING : min(nTargetSpacingWorkMax, (int64) STAKE_TARGET_SPACING * (1 + pindexLast->nHeight - pindexPrev->nHeight));
+
+    // For coin begining stage, to generate coin faster, use same strategy of TARGET_SPACING for both POS and POW, this behavior will change later.
+    // Also, I want we have enough transactions for generating staking block, so we need many small blocks.
+    // TODO, Tune POW block number here.
+    int64 nTargetSpacing =  fProofOfStake? STAKE_TARGET_SPACING : STAKE_TARGET_SPACING;
+
+    int64 nInterval = nTargetTimespan / nTargetSpacing;
+    bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
+    bnNew /= ((nInterval + 1) * nTargetSpacing);
 
     if (bnNew > bnProofOfWorkLimit)
         bnNew = bnProofOfWorkLimit;

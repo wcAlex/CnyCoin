@@ -1203,8 +1203,29 @@ bool CWallet::SelectCoins(int64 nTargetValue, unsigned int nSpendTime, set<pair<
             SelectCoinsMinConf(nTargetValue, 0, 1, vCoins, setCoinsRet, nValueRet));
 }
 
+bool CWallet::SelectCoinsForPOSMint(int64 nTargetValue, unsigned int nSpendTime, set<pair<const CWalletTx*,unsigned int> >& setCoinsRet, int64& nValueRet, const CCoinControl* coinControl) const
+{
+    vector<COutput> vCoins;
+    AvailableCoins(vCoins, nSpendTime, true, coinControl);
 
+    if (vCoin.size() == 0) {
+        printf("Couldn't find any availabe coins in wallet with nSpendTime %U \n", nSpendTime);
 
+        return false;
+    }
+
+    // Random select one or two transaction for mint.
+    // The thinking here is to ensure the network has enough available coins to generate blocks, as in the begining stage,
+    // we assume there is not so many transactions, customer and miner, if we get all coins at once, we won't have enough coins
+    // to generate POS blocks.
+    random_shuffle(vCoins.begin(), vCoins.end(), GetRandInt);
+    setCoinsRet.insert(make_pair(vCoins[0].tx, 0));
+    if (vCoins.size() > 1) {
+        setCoinsRet.insert(make_pair(vCoins[1].tx, 1));
+    }
+
+    return true;
+}
 
 bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend,
                                 CWalletTx& wtxNew, CReserveKey& reservekey, int64& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl)
@@ -1414,7 +1435,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     set<pair<const CWalletTx*,unsigned int> > setCoins;
     vector<const CWalletTx*> vwtxPrev;
     int64 nValueIn = 0;
-    if (!SelectCoins(nBalance - nReserveBalance, txNew.nTime, setCoins, nValueIn))
+    if (!SelectCoinsForPOSMint(nBalance - nReserveBalance, txNew.nTime, setCoins, nValueIn))
         return false;
     if (setCoins.empty())
         return false;
