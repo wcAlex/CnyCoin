@@ -1213,7 +1213,7 @@ bool CWallet::SelectCoinsForPOSMint(int64 nTargetValue, unsigned int nSpendTime,
     vector<COutput> vCoins;
     AvailableCoins(vCoins, nSpendTime, true, coinControl);
 
-    if (vCoin.size() == 0) {
+    if (vCoins.size() == 0) {
         printf("Couldn't find any availabe coins in wallet with nSpendTime %U \n", nSpendTime);
 
         return false;
