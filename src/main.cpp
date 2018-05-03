@@ -979,6 +979,7 @@ int CMerkleTx::GetDepthInMainChain(CBlockIndex* &pindexRet) const
 
 int CMerkleTx::GetBlocksToMaturity() const
 {
+    // TODO:Chi, try to remove this condition, check maturity for coinbase and coinstake coin as well.
     if (!(IsCoinBase() || IsCoinStake()))
         return 0;
     return max(0, (nCoinbaseMaturity+20) - GetDepthInMainChain());
