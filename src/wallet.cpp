@@ -1021,12 +1021,7 @@ void CWallet::AvailableCoins(std::vector<COutput>& vCoins, unsigned int nSpendTi
             if (pcoin->nTime > nSpendTime)
                 continue;  // ppcoin: timestamp must not exceed spend time
 
-            // Comment out and change coin maturity measure behavior, since we need coinbase coin to participate POS.
-//            if ((pcoin->IsCoinBase() || pcoin->IsCoinStake()) && pcoin->GetBlocksToMaturity() > 0)
-//                continue;
-
-            // By this way, all coinbase and coinstake coins are avilable, other transaction coins need to be stage for 40 blocks
-            if (pcoin->GetBlocksToMaturity() > 0)
+            if ((pcoin->IsCoinBase() || pcoin->IsCoinStake()) && pcoin->GetBlocksToMaturity() > 0)
                 continue;
 
             for (unsigned int i = 0; i < pcoin->vout.size(); i++) {
