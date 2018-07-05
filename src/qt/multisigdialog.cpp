@@ -538,7 +538,7 @@ void MultisigDialog::on_sendTransactionButton_clicked()
     SyncWithWallets(txHash, tx, NULL, true);
     RelayTransaction(tx, txHash);
 
-    ui->statusLabel->setText(tr("The transaction is sent to peercoin network."));
+    ui->statusLabel->setText(tr("The transaction is sent to cnycoin network."));
 }
 
 MultisigInputEntry * MultisigDialog::addInput()

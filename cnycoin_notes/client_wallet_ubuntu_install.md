@@ -1,6 +1,6 @@
 // need to validate
 
-contrib/debian/peercoin-qt.desktop
+contrib/debian/cnycoin-qt.desktop
 
 
 # dependencies (need to validate)

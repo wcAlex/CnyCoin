@@ -1,0 +1,11 @@
+[Protocol]
+exec=cnycoin-qt '%u'
+protocol=cnycoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

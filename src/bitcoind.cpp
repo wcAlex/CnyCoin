@@ -48,12 +48,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("Peercoin version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("CnyCoin version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  peercoind [options]                     " + "\n" +
-                  "  peercoind [options] <command> [params]  " + _("Send command to -server or peercoind") + "\n" +
-                  "  peercoind [options] help                " + _("List commands") + "\n" +
-                  "  peercoind [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  cnycoind [options]                     " + "\n" +
+                  "  cnycoind [options] <command> [params]  " + _("Send command to -server or cnycoind") + "\n" +
+                  "  cnycoind [options] help                " + _("List commands") + "\n" +
+                  "  cnycoind [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
             strUsage += "\n" + HelpMessageCli(false);
@@ -64,7 +64,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "peercoin:") && !boost::algorithm::istarts_with(argv[i], "ppcoin:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "cnycoin:") && !boost::algorithm::istarts_with(argv[i], "ppcoin:"))
                 fCommandLine = true;
 
         if (fCommandLine)

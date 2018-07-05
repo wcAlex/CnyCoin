@@ -11,12 +11,12 @@ bin
 *.exe
 src/*.exe
 src/*/*.exe
-src/peercoin
-src/peercoin-cli
-src/peercoind
-src/test_peercoin
-src/test/test_peercoin
-src/qt/test/test_peercoin-qt
+src/cnycoin
+src/cnycoin-cli
+src/cnycoind
+src/test_cnycoin
+src/test/test_cnycoin
+src/qt/test/test_cnycoin-qt
 
 # autoreconf
 Makefile.in
@@ -70,7 +70,7 @@ src/qt/res/.dirstamp
 *.o
 *.patch
 .ppcoin
-.peercoin
+.cnycoin
 *.a
 *.pb.cc
 *.pb.h
@@ -83,16 +83,16 @@ src/qt/res/.dirstamp
 *.qm
 Makefile
 ppcoin-qt
-peercoin-qt
+cnycoin-qt
 PPCoin-Qt.app
-Peercoin-Qt.app
+CnyCoin-Qt.app
 .qmake.stash
-peercoin-qt_plugin_import.cpp
+cnycoin-qt_plugin_import.cpp
 
 # Unit-tests
 Makefile.test
 ppcoin-qt_test
-peercoin-qt_test
+cnycoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -123,10 +123,12 @@ qa/pull-tester/run-bitcoind-for-test.sh
 qa/pull-tester/build-tests.sh
 
 !src/leveldb-*/Makefile
-peercoin-qt
+cnycoin-qt
 
 #db4/
 db4/
 
 #ignore in top level directory only
 /debian
+
+\.vscode/settings\.json

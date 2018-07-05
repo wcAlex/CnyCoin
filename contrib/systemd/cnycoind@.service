@@ -1,0 +1,33 @@
+# /etc/systemd/system/cnycoind.service
+# /usr/bin/
+# sudo systemctl enable cnycoind
+# sudo systemctl start cnycoind 
+# sudo systemctl status cnycoind 
+# TODO, add pid file to track.
+
+[Unit]
+Description=CnyCoin daemon
+After=network.target 
+#Conflicts=cnycoind-tor@%i.service 
+Conflicts=cnycoind-tor.service
+
+[Service]
+#User=%i 
+#Group=users 
+User=ubuntu
+Group=ubuntu
+Type=forking
+Restart=always
+RestartSec=15
+ExecStart=/usr/bin/cnycoind -daemon -datadir=/home/ubuntu/.cnycoin -conf=/home/ubuntu/.cnycoin/cnycoin.conf
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+
+## security
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

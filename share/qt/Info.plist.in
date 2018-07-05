@@ -29,10 +29,10 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Peercoin-Qt</string>
+  <string>CnyCoin-Qt</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.peercoin.Peercoin-Qt</string>
+  <string>org.cnycoin.CnyCoin-Qt</string>
 
   <key>NSPrincipalClass</key>
     <string>NSApplication</string>

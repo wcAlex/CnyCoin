@@ -1,5 +1,5 @@
 # Copyright (c) 2009-2010 Satoshi Nakamoto
-# Copyright (c) 2011-2018 The Peercoin developers
+# Copyright (c) 2011-2018 The CnyCoin developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -153,10 +153,10 @@ OBJS= \
     obj/txdb.o
 
 
-all: peercoind
+all: cnycoind
 
-test check: test_peercoin FORCE
-	./test_peercoin
+test check: test_cnycoin FORCE
+	./test_cnycoin
 
 #
 # LevelDB support
@@ -185,7 +185,7 @@ obj/%.o: %.cpp
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-peercoind: $(OBJS:obj/%=obj/%)
+cnycoind: $(OBJS:obj/%=obj/%)
 	$(LINK) $(xCXXFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
 	@cp $@ ppcoind
 
@@ -198,11 +198,11 @@ obj-test/%.o: test/%.cpp
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-test_peercoin: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
+test_cnycoin: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(TESTLIBS) $(xLDFLAGS) $(LIBS)
 
 clean:
-	-rm -f peercoind test_peercoin
+	-rm -f cnycoind test_cnycoin
 	-rm -f ppcoind
 	-rm -f obj/*.o
 	-rm -f obj-test/*.o

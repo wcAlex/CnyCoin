@@ -1,4 +1,4 @@
-Source: peercoin
+Source: cnycoin
 Section: utils
 Priority: optional
 Maintainer: Peerchemist <peerchemist@protonmail.ch>
@@ -26,26 +26,26 @@ Build-Depends: debhelper,
  qttools5-dev-tools, qttools5-dev,
  libqrencode-dev
 Standards-Version: 3.9.5
-Homepage: https://peercoin.net/
-Vcs-Git: git://github.com/peercoin/peercoin.git
-Vcs-Browser: https://github.com/peercoin/peercoin
+Homepage: https://cnycoin.net/
+Vcs-Git: git://github.com/cnycoin/cnycoin.git
+Vcs-Browser: https://github.com/cnycoin/cnycoin
 
-Package: peercoind
+Package: cnycoind
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- Peercoin is a crypto-currency project forked from Bitcoin with aim to achieve
+ CnyCoin is a crypto-currency project forked from Bitcoin with aim to achieve
  energy-efficiency and keep as much as possible the original Bitcoin's
  preferable properties.
  .
- This package provides peercoind, a daemon client for the Peercoin network.
+ This package provides cnycoind, a daemon client for the CnyCoin network.
 
-Package: peercoin-qt
+Package: cnycoin-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- Peercoin is a crypto-currency project forked from Bitcoin with aim to achieve
+ CnyCoin is a crypto-currency project forked from Bitcoin with aim to achieve
  energy-efficiency and keep as much as possible the original Bitcoin's
  preferable properties.
  .
- This package provides Peercoin-Qt, a GUI client for Peercoin based on Qt.
+ This package provides CnyCoin-Qt, a GUI client for CnyCoin based on Qt.

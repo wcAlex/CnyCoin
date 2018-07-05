@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CnyCoin
+Comment=Core wallet for CnyCoin P2P Cryptocurrency
+Comment[de]=Offizieller Client für die Kryptowährung CnyCoin
+Exec=/usr/bin/cnycoin-qt %u
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/cnycoin.png
+MimeType=x-scheme-handler/cnycoin;
+Categories=Application;Network;

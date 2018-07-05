@@ -6,32 +6,32 @@ libssl-dev libdb++-dev libminiupnpc-dev libprotobuf-dev protobuf-compiler
 
 
 # copy binary
-scp -i ~/.ssh/tao-web-test.pem src/peercoin-cli   ubuntu@54.149.87.103:/usr/bin
-scp -i ~/.ssh/tao-web-test.pem src/peercoin   ubuntu@54.149.87.103:/usr/bin
+scp -i ~/.ssh/tao-web-test.pem src/cnycoin-cli   ubuntu@54.149.87.103:/usr/bin
+scp -i ~/.ssh/tao-web-test.pem src/cnycoin   ubuntu@54.149.87.103:/usr/bin
 
 
 # copy systemd config.
-scp -i ~/.ssh/tao-web-test.pem src/peercoin contrib/systemd/peercoind@.service ubuntu@54.149.87.103:/etc/systemd/system
+scp -i ~/.ssh/tao-web-test.pem src/cnycoin contrib/systemd/cnycoind@.service ubuntu@54.149.87.103:/etc/systemd/system
 
 # initial run
-sudo systemctl enable peercoind
-sudo systemctl start peercoind 
-sudo systemctl status peercoind 
+sudo systemctl enable cnycoind
+sudo systemctl start cnycoind 
+sudo systemctl status cnycoind 
 
 # update binary
-sudo systemctl stop peercoind
+sudo systemctl stop cnycoind
 systemctl daemon-reload
-scp -i ~/.ssh/tao-web-test.pem src/peercoin   ubuntu@54.149.87.103:/usr/bin
-sudo systemctl start peercoind 
-sudo systemctl status peercoind 
+scp -i ~/.ssh/tao-web-test.pem src/cnycoin   ubuntu@54.149.87.103:/usr/bin
+sudo systemctl start cnycoind 
+sudo systemctl status cnycoind 
 
 # logs & wallet
-workdir=/home/ubuntu/.peercoin
-log=/home/ubuntu/.peercoin/debug.log or /home/ubuntu/.peercoin/testnet/debug.log
-wallet=/home/ubuntu/.peercoin/wallet.dat or /home/ubuntu/.peercoin/testnet/wallet.dat
+workdir=/home/ubuntu/.cnycoin
+log=/home/ubuntu/.cnycoin/debug.log or /home/ubuntu/.cnycoin/testnet/debug.log
+wallet=/home/ubuntu/.cnycoin/wallet.dat or /home/ubuntu/.cnycoin/testnet/wallet.dat
 
 # config & parameters
-/usr/bin/peercoind -daemon -datadir=/home/ubuntu/.peercoin -conf=/home/ubuntu/.peercoin/peercoin.conf
+/usr/bin/cnycoind -daemon -datadir=/home/ubuntu/.cnycoin -conf=/home/ubuntu/.cnycoin/cnycoin.conf
 
-Sample config: contrib/debian/examples/peercoin.conf
+Sample config: contrib/debian/examples/cnycoin.conf
 
