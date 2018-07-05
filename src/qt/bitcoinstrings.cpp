@@ -66,9 +66,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Set the number of script verification threads (up to 16, 0 = auto, <0 = "
 "leave that many cores free, default: 0)"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"This is a pre-release test build - use at your own risk - do not use for "
-"mining or merchant applications"),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Unable to bind to %s on this computer. CnyCoin is probably already running."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Warning: -paytxfee is set very high! This is the transaction fee you will "
