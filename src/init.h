@@ -23,4 +23,6 @@ enum HelpMessageMode
 
 std::string HelpMessage(HelpMessageMode mode);
 
+#define DISABLE_MINING 1
+
 #endif

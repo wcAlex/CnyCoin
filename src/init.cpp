@@ -999,7 +999,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 
 #ifndef DISABLE_MINING
     // Generate coins in the background
-    GenerateBitcoins(GetBoolArg("-gen", false), pwalletMain);
+    // GenerateBitcoins(GetBoolArg("-gen", false), pwalletMain);
 #endif // DISABLE_MINING
 
     // ppcoin: mint proof-of-stake blocks in the background
